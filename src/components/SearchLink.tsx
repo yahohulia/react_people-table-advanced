@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { Person } from '../types';
 import classNames from 'classnames';
 
@@ -9,10 +9,11 @@ interface Props {
 
 export const SearchLink: React.FC<Props> = ({ person }) => {
   const isWomenName = person.sex === 'f';
+  const { search } = useLocation();
 
   return (
     <NavLink
-      to={`/people/${person.slug}`}
+      to={{ pathname: `/people/${person.slug}`, search }}
       className={classNames({
         'has-text-danger': isWomenName,
       })}
